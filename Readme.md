@@ -44,20 +44,23 @@ Menggunakan library **Unsloth** dan teknik **QLoRA** (Quantized Low-Rank Adaptat
 Pastikan file PDF peraturan (contoh: `permenkes-no-10-tahun-2024.pdf`) berada di direktori yang sama dengan script.
 
 ---
-
 ## 🚀 Cara Menjalankan
 
 Cukup jalankan satu perintah berikut untuk mengeksekusi seluruh pipeline (Cleaning -> Augmentasi -> Training):
 
 ```bash
 python run_pipeline.py
-
 ```
+
+**Jika finetuning tidak dapat dijalankan**
+- Gunakan colab untuk environment yang lebih stabil(gunakan minimal t4 runtime)
+- Setelah memasuki colab buka file `Finetuning QLora.py` dan upload dataset `dataset_final.jsonl`
+- lalu lakukan running pada colab
 
 ### Output
 
 Setelah proses selesai, Anda akan mendapatkan:
 
-1. `"dataset_final.jsonl`: Dataset final yang siap pakai.
+1. `dataset_final.jsonl`: Dataset final yang siap pakai.
 2. `outputs/`: Folder berisi adapter model LoRA yang telah dilatih.
 3. `hasil_perbandingan_final.txt`: Laporan evaluasi *Before vs After* fine-tuning.
