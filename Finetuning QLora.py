@@ -209,7 +209,7 @@ def cetak_perbandingan(hasil_before, hasil_after):
     # Simpan ke file
     with open("hasil_perbandingan_final.txt", "w") as f:
         f.write(laporan_str)
-    print("\n📄 File 'hasil_perbandingan_final.txt' berhasil disimpan.")
+    print("\nFile 'hasil_perbandingan_final.txt' berhasil disimpan.")
 
 # ==========================================
 # 3. MAIN EXECUTION (ALUR UTAMA)
