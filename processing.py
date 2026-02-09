@@ -120,6 +120,10 @@ def generate_final_dataset(input_pdf, output_jsonl):
             "output": chunk
         })
 
+    # Print 10 data pertama
+    for item in dataset[:10]:
+        print(json.dumps(item, ensure_ascii=False, indent=2))
+
     # 3. Save
     with open(output_jsonl, 'w', encoding='utf-8') as f:
         for item in dataset:
