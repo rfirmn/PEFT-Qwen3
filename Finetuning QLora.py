@@ -54,7 +54,7 @@ TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj",
 # Parameter Training
 TRAIN_BATCH_SIZE = 1
 GRAD_ACCUMULATION = 8
-WARMUP_STEPS = 5
+WARMUP_STEPS = 3
 MAX_STEPS = 60
 LEARNING_RATE = 2e-4
 WEIGHT_DECAY = 0.01
