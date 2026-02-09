@@ -61,6 +61,3 @@ Setelah proses selesai, Anda akan mendapatkan:
 1. `"dataset_final.jsonl`: Dataset final yang siap pakai.
 2. `outputs/`: Folder berisi adapter model LoRA yang telah dilatih.
 3. `hasil_perbandingan_final.txt`: Laporan evaluasi *Before vs After* fine-tuning.
-
-```
-
