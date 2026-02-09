@@ -7,7 +7,7 @@ Proyek ini bertujuan untuk melatih Large Language Model (LLM) agar dapat menjawa
 
 Kekuatan utama dari pipeline ini terletak pada strategi **Data Engineering** yang diterapkan sebelum model dilatih. saya menyadari bahwa kualitas data lebih penting daripada sekadar ukuran data (*Data-Centric AI*).
 
-### 1. Structure-Aware Dataset Generation (`script_final.py`)
+### 1. Structure-Aware Dataset Generation (`processing.py`)
 Berbeda dengan metode *naive chunking* (memotong teks berdasarkan jumlah token tetap) yang sering memutus kalimat atau konteks, saya menggunakan metode **Semantic & Structural Parsing**:
 
 * **Logic-Based Cleaning:** Script secara cerdas menyambung kembali baris yang terputus (broken lines) akibat format PDF dengan mendeteksi *glue words* (kata sambung seperti "dan", "yang", "dalam") di akhir baris.
