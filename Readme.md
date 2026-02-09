@@ -58,50 +58,9 @@ python run_pipeline.py
 
 Setelah proses selesai, Anda akan mendapatkan:
 
-1. `dataset_augmented_v1.jsonl`: Dataset final yang siap pakai.
+1. `"dataset_final.jsonl`: Dataset final yang siap pakai.
 2. `outputs/`: Folder berisi adapter model LoRA yang telah dilatih.
 3. `hasil_perbandingan_final.txt`: Laporan evaluasi *Before vs After* fine-tuning.
 
 ```
 
----
-
-### 3. Cara Menjalankan Script (Langkah demi Langkah)
-
-Berikut adalah panduan praktis untuk Anda:
-
-#### Langkah 1: Siapkan Lingkungan (Folder)
-Buat satu folder baru, lalu masukkan semua file berikut ke dalamnya:
-1.  `script_final.py` (Script asli Anda)
-2.  `augmented.py` (Script asli Anda)
-3.  `Finetuning QLora.py` (Script asli Anda)
-4.  `requirements.txt` (File dependensi Anda)
-5.  **`run_pipeline.py`** (Script baru yang saya buatkan di atas)
-6.  `permenkes-no-10-tahun-2024.pdf` (File PDF target. **Penting:** Pastikan nama file ini sesuai dengan yang tertulis di dalam `script_final.py` atau ubah kodenya jika nama file Anda berbeda).
-
-#### Langkah 2: Install Library
-Buka terminal/command prompt di folder tersebut, lalu jalankan:
-
-```bash
-pip install -r requirements.txt
-
-```
-
-*(Catatan: Jika Anda menjalankan ini di Windows lokal tanpa GPU NVIDIA, langkah Fine-tuning mungkin akan sangat lambat atau error karena Unsloth/bitsandbytes sangat bergantung pada CUDA. Script ini paling optimal berjalan di Google Colab atau Linux server dengan GPU).*
-
-#### Langkah 3: Eksekusi Pipeline
-
-Jalankan perintah berikut di terminal:
-
-```bash
-python run_pipeline.py
-
-```
-
-#### Apa yang akan terjadi?
-
-1. Script akan membaca PDF dan membuat `dataset_finetuning.jsonl`.
-2. Script akan membaca JSONL tersebut, melakukan augmentasi, dan menyimpan `dataset_final.jsonl`.
-3. `run_pipeline.py` akan otomatis me-rename file menjadi `dataset_augmented_v1.jsonl` dan memperbaiki path di script fine-tuning agar tidak error.
-4. Proses training dimulai. Anda bisa melihat *progress bar* berjalan.
-5. Hasil akhir berupa perbandingan jawaban model sebelum dan sesudah training akan muncul di layar dan tersimpan di file txt.
