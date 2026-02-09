@@ -1,0 +1,32 @@
+# Dependencies for PDF Processing
+pymupdf4llm
+pymupdf
+
+# Dependencies for Finetuning QLora.py (Unsloth & LLM)
+# Core PyTorch (pastikan versi CUDA sesuai dengan sistem Anda)
+torch
+
+# Hugging Face Ecosystem
+datasets
+huggingface_hub>=0.34.0
+hf_transfer
+sentencepiece
+protobuf
+
+# LoRA & Optimization
+bitsandbytes
+accelerate
+peft
+triton
+
+
+transformers==4.56.2
+trl==0.22.2
+xformers
+
+# Unsloth (Library utama untuk fine-tuning cepat)
+unsloth
+unsloth_zoo
+cut_cross_entropy
+
+
