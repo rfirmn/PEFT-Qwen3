@@ -1,7 +1,35 @@
+def install_dependencies():
+    """Instalasi dependensi jika berjalan di Google Colab."""
+    import os, re, torch
+    if "COLAB_" in "".join(os.environ.keys()):
+        print("📦 Mendeteksi Google Colab, menginstal dependensi...")
+        
+        # Deteksi versi torch untuk xformers
+        v = re.match(r"[0-9\.]{3,}", str(torch.__version__)).group(0)
+        xformers = "xformers==" + ("0.0.32.post2" if v == "2.8.0" else "0.0.29.post3")
+        
+        # 1. Instalasi library inti tanpa dependensi untuk mencegah konflik
+        os.system(f"pip install --no-deps bitsandbytes accelerate {xformers} peft trl triton cut_cross_entropy unsloth_zoo")
+        
+        # 2. Perbaikan: Tambahkan spasi di antara datasets dan huggingface_hub
+        os.system("pip install sentencepiece protobuf hf_transfer")
+        os.system("pip install 'huggingface_hub>=0.34.0'")
+        
+        # 3. Instalasi Unsloth dan Transformers
+        os.system("pip install --no-deps unsloth")
+        os.system("pip install transformers==4.56.2")
+        os.system("pip install --no-deps trl==0.22.2")
+        
+        print("✅ Instalasi selesai. Silakan restart runtime jika perlu.")
+
+# jika di collab langsung install dependensi, jika tidak, asumsikan sudah terinstal
+install_dependencies()
+
 import os
 import re
 import torch
 import json
+import sys
 from datasets import load_dataset
 from unsloth import FastLanguageModel, is_bfloat16_supported
 from trl import SFTTrainer
@@ -211,12 +239,37 @@ def cetak_perbandingan(hasil_before, hasil_after):
         f.write(laporan_str)
     print("\nFile 'hasil_perbandingan_final.txt' berhasil disimpan.")
 
+
+def is_google_colab():
+    """Mengecek apakah script berjalan di lingkungan Google Colab."""
+    # Cara 1: Cek module google.colab
+    if 'google.colab' in sys.modules:
+        return True
+    # Cara 2: Cek environment variable (kadang berbeda tiap instance)
+    if 'COLAB_GPU' in os.environ:
+        return True
+    return False
+
+def clear_gpu_memory():
+    """
+    Membersihkan memori.
+    """
+    import gc
+
+    # LOGIKA IF-ELSE KOLAB
+    if is_google_colab():
+        print("\n[Colab Detected] Membersihkan Memori GPU & RAM...")
+        gc.collect()
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize() 
+        print("   ✅ Memori dibersihkan.")
+    else:
+        print("\n[Local Environment] ⏩ Skip pembersihan memori agresif.")
+
 # ==========================================
 # 3. MAIN EXECUTION (ALUR UTAMA)
 # ==========================================
 if __name__ == "__main__":
-    # 0. Install Libs (Jika di Colab)
-    install_dependencies()
 
     # 1. Load Model & Setup
     model, tokenizer = load_base_model()
@@ -227,6 +280,8 @@ if __name__ == "__main__":
     globals()['tokenizer'] = tokenizer 
     
     hasil_before = jalankan_pengujian(model, tokenizer, "BEFORE FINE-TUNING")
+
+    clear_gpu_memory()
 
     # 3. Fine Tuning
     # Kembalikan model ke mode training

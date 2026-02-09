@@ -13,9 +13,15 @@ def run_script(script_name):
         print(f"\nSUKSES: {script_name} selesai dijalankan.")
     except subprocess.CalledProcessError as e:
         print(f"\nERROR: Gagal menjalankan {script_name}. (Exit code: {e.returncode})")
+        if script_name == "Finetuning QLora.py":
+            print(f"\n{'='*50}")
+            print("Coba jalankan di Colab Agar lebih stabil.")
+            print(f"{'='*50}")
         sys.exit(1)
     except Exception as e:
         print(f"\nERROR: Terjadi kesalahan tidak terduga pada {script_name}: {e}")
+        if script_name == "Finetuning QLora.py":
+            print("Coba jalankan di Colab Agar lebih stabil.")
         sys.exit(1)
 
 def main():
